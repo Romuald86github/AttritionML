@@ -1,0 +1,34 @@
+# Ignore MLflow database
+mlflow.db
+# Ignore MLflow artifacts
+mlruns/
+# Ignore Python bytecode files
+*.pyc
+__pycache__/
+
+# Ignore application zip file
+/app.zip
+
+# Ignore Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Ignore Terraform configuration backup files
+*.backup
+
+# Ignore .terraform directory
+.terraform/
+
+# Ignore sensitive variable files
+terraform.tfvars
+
+# ignore terraformlock
+.terraform.lock.hcl
+
+# Ignore large files (greater than 100MB)
+
+*.h5
+*.hdf5
+*.tar
+*.tar.gz
+*.zip

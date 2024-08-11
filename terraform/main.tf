@@ -44,6 +44,13 @@ resource "aws_elastic_beanstalk_environment" "employee_attrition_env" {
   application         = aws_elastic_beanstalk_application.employee_attrition.name
   solution_stack_name = "64bit Amazon Linux 2023 v4.1.1 running Python 3.9"
 
+  
+  setting {
+    namespace = "aws:elasticbeanstalk:environment"
+    name      = "IamInstanceProfile"
+    value     = "eb-instance-profile"
+  }
+  
   setting {
     namespace = "aws:elasticbeanstalk:environment"
     name      = "EnvironmentType"

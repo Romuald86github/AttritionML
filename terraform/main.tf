@@ -89,16 +89,11 @@ EOF
   }
 
   setting {
-    namespace = "aws:elasticbeanstalk:container:docker"
+    namespace = "aws:elasticbeanstalk:application:environment"
     name      = "DockerImage"
     value     = "${var.ecr_repository_url}:${var.image_tag}"
   }
 
-  setting {
-    namespace = "aws:elasticbeanstalk:container:docker"
-    name      = "DockerCommand"
-    value     = "gunicorn --bind 0.0.0.0:5010 application:app"
-  }
 
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"

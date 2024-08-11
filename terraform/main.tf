@@ -42,7 +42,7 @@ resource "aws_elastic_beanstalk_application" "employee_attrition" {
 resource "aws_elastic_beanstalk_environment" "employee_attrition_env" {
   name                = "employee-attrition-env"
   application         = aws_elastic_beanstalk_application.employee_attrition.name
-  solution_stack_name = "64bit Amazon Linux 2 v3.4.16 running Docker"
+  solution_stack_name = "64bit Amazon Linux 2023 v4.1.1 running Python 3.9"
 
   setting {
     namespace = "aws:elasticbeanstalk:environment"

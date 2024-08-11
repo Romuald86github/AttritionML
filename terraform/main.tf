@@ -32,9 +32,10 @@ resource "aws_subnet" "public_2" {
   }
 }
 
-# Use the existing IAM service role for Elastic Beanstalk
+# use the existing ServiceRole
 data "aws_iam_role" "eb_service_role" {
-  name = "eb-service-role"
+  name = "AWSServiceRoleForElasticBeanstalk"
+  path = "/aws-service-role/elasticbeanstalk.amazonaws.com/"
 }
 
 # Create the Elastic Beanstalk application

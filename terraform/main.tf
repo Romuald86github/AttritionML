@@ -32,6 +32,11 @@ resource "aws_subnet" "public_2" {
   }
 }
 
+# Use the existing IAM service role for Elastic Beanstalk
+data "aws_iam_role" "eb_service_role" {
+  name = "eb-service-role"
+}
+
 # Create the Elastic Beanstalk application
 resource "aws_elastic_beanstalk_application" "employee_attrition" {
   name        = "employee-attrition"
@@ -46,7 +51,7 @@ resource "aws_elastic_beanstalk_environment" "employee_attrition_env" {
 
   
   setting {
-    namespace = "aws:elasticbeanstalk:environment"
+    namespace = "aws:autoscaling:launchconfiguration"
     name      = "IamInstanceProfile"
     value     = "eb-instance-profile"
   }

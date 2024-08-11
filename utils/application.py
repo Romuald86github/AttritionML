@@ -1,12 +1,10 @@
 import os
 import mlflow
 import mlflow.sklearn
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify
 import pandas as pd
 import boto3
 import pickle
-from evidently.dashboard import Dashboard
-from evidently.tabs import DataDriftTab, NumericStabilityTab, CatTargetDriftTab
 
 app = Flask(__name__, static_folder='/app/static', template_folder='/app/templates')
 
@@ -53,17 +51,7 @@ def predict():
     df = pd.DataFrame([data])
     X_preprocessed = preprocessing_pipeline.transform(df)
     prediction = model.predict(X_preprocessed)
-
-    # Log the prediction to Evidently
-    evidently_dashboard = Dashboard(tabs=[DataDriftTab(), NumericStabilityTab(), CatTargetDriftTab()])
-    evidently_dashboard.calculate(df, X_preprocessed, prediction)
-    evidently_dashboard.save_html(os.path.join('static', 'evidently_report.html'))
-
     return jsonify({'prediction': int(prediction[0])})
-
-@app.route('/evidently_report')
-def serve_evidently_report():
-    return send_from_directory('static', 'evidently_report.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5010)

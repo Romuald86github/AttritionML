@@ -1,3 +1,7 @@
+# ignore AWSCLIV2.pkg
+
+AWSCLIV2.pkg
+
 # Ignore MLflow database
 mlflow.db
 # Ignore MLflow artifacts

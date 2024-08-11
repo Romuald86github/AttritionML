@@ -32,7 +32,7 @@ resource "aws_subnet" "public_2" {
   }
 }
 
-# use the existing ServiceRole
+# Use the existing Elastic Beanstalk service role
 data "aws_iam_role" "eb_service_role" {
   name = "AWSServiceRoleForElasticBeanstalk"
 }
@@ -49,13 +49,12 @@ resource "aws_elastic_beanstalk_environment" "employee_attrition_env" {
   application         = aws_elastic_beanstalk_application.employee_attrition.name
   solution_stack_name = "64bit Amazon Linux 2023 v4.1.1 running Python 3.9"
 
-  
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "IamInstanceProfile"
     value     = "eb-instance-profile"
   }
-  
+
   setting {
     namespace = "aws:elasticbeanstalk:environment"
     name      = "EnvironmentType"
@@ -65,7 +64,7 @@ resource "aws_elastic_beanstalk_environment" "employee_attrition_env" {
   setting {
     namespace = "aws:elasticbeanstalk:environment"
     name      = "ServiceRole"
-    value     = "aws-elasticbeanstalk-service-role"
+    value     = data.aws_iam_role.eb_service_role.name
   }
 
   setting {
@@ -105,7 +104,6 @@ EOF
     name      = "DockerImage"
     value     = "${var.ecr_repository_url}:${var.image_tag}"
   }
-
 
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"

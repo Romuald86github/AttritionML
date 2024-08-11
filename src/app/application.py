@@ -63,7 +63,7 @@ def predict():
 
 @app.route('/evidently_report')
 def serve_evidently_report():
-    return send_from_directory('static', 'evidently_report.html')
+    return send_from_directory('/app/static', 'evidently_report.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5010)

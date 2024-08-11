@@ -32,11 +32,6 @@ resource "aws_subnet" "public_2" {
   }
 }
 
-# Use the existing Elastic Beanstalk service role
-data "aws_iam_role" "eb_service_role" {
-  name = "AWSServiceRoleForElasticBeanstalk"
-}
-
 # Create the Elastic Beanstalk application
 resource "aws_elastic_beanstalk_application" "employee_attrition" {
   name        = "employee-attrition"
@@ -64,7 +59,7 @@ resource "aws_elastic_beanstalk_environment" "employee_attrition_env" {
   setting {
     namespace = "aws:elasticbeanstalk:environment"
     name      = "ServiceRole"
-    value     = data.aws_iam_role.eb_service_role.name
+    value     = "arn:aws:iam::662479519742:role/aws-service-role/elasticbeanstalk.amazonaws.com/AWSServiceRoleForElasticBeanstalk"
   }
 
   setting {

@@ -18,7 +18,7 @@ RUN pip install gunicorn
 FROM nginx:latest
 
 # Copy the Nginx configuration file
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy the Flask app code from the build stage
 COPY --from=build /app /app
@@ -26,5 +26,5 @@ COPY --from=build /app /app
 # Expose the port for Nginx
 EXPOSE 80
 
-# Start Nginx and Gunicorn
-CMD ["sh", "-c", "nginx -g 'daemon off;' && gunicorn --bind 0.0.0.0:5010 application:app"]
+# Start Gunicorn and Nginx using a supervisor-like approach
+CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:5010 application:app & nginx -g 'daemon off;'"]

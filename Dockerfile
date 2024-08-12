@@ -1,5 +1,4 @@
-# Stage 1: Build the Flask application
-FROM python:3.9-slim as build
+FROM python:3.9-slim
 
 # Set the working directory in the container
 WORKDIR /app
@@ -11,19 +10,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Install Gunicorn
 RUN pip install gunicorn
 
-
 # Copy the Flask app code
 COPY src/app/ /app/
 
-
-# Stage 2: Set up Nginx with the Flask app
-FROM nginx:latest
-
 # Copy the Nginx configuration file
 COPY nginx.conf /etc/nginx/nginx.conf
-
-# Copy the Flask app code from the build stage
-COPY --from=build /app /app
 
 # Expose the port for Nginx
 EXPOSE 80

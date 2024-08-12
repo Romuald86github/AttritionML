@@ -24,4 +24,4 @@ COPY --from=build /app /app
 EXPOSE 5010
 
 # Start Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:5010", "application:app"]
+CMD ["/usr/local/bin/gunicorn", "--bind", "0.0.0.0:5010", "application:app"]

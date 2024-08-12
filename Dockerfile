@@ -11,20 +11,17 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the Flask app code
 COPY src/app/ /app/
 
-# Stage 2: Set up Nginx with the Flask app
-FROM nginx:latest
+# Stage 2: Run the Flask app with Gunicorn
+FROM python:3.9-slim
 
-# Install Gunicorn
-RUN pip install gunicorn
-
-# Copy the Nginx configuration file
-COPY nginx.conf /etc/nginx/nginx.conf
+# Set the working directory in the container
+WORKDIR /app
 
 # Copy the Flask app code from the build stage
 COPY --from=build /app /app
 
-# Expose the port for Nginx
-EXPOSE 80
+# Expose the port for Gunicorn
+EXPOSE 5010
 
-# Start Gunicorn and Nginx using a supervisor-like approach
-CMD ["sh", "-c", "/usr/local/bin/gunicorn --bind 0.0.0.0:5010 application:app & nginx -g 'daemon off;'"]
+# Start Gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:5010", "application:app"]

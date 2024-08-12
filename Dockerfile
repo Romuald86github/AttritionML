@@ -15,7 +15,6 @@ COPY src/app/ /app/
 FROM nginx:latest
 
 # Install Gunicorn
-RUN apt-get update && apt-get install -y python3-pip
 RUN pip install gunicorn
 
 # Copy the Nginx configuration file

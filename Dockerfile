@@ -29,4 +29,4 @@ COPY --from=build /app /app
 EXPOSE 80
 
 # Start Gunicorn and Nginx using a supervisor-like approach
-CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:5010 application:app & nginx -g 'daemon off;'"]
+CMD ["sh", "-c", "/usr/local/bin/gunicorn --bind 0.0.0.0:5010 application:app & nginx -g 'daemon off;'"]

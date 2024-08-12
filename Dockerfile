@@ -16,7 +16,7 @@ FROM nginx:latest
 
 # Install Gunicorn
 RUN apt-get update && apt-get install -y python3-pip
-RUN pip3 install gunicorn
+RUN pip install gunicorn
 
 # Copy the Nginx configuration file
 COPY nginx.conf /etc/nginx/nginx.conf

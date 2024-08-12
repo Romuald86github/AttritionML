@@ -1,7 +1,7 @@
 import os
 import mlflow
 import mlflow.sklearn
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, render_template, send_from_directory
 import pandas as pd
 import boto3
 import pickle
@@ -47,6 +47,10 @@ s3_client.download_file(bucket_name, f"{artifact_path}/preprocessing_pipeline.pk
 with open(local_pipeline_path, 'rb') as f:
     preprocessing_pipeline = pickle.load(f)
 
+@app.route('/')
+def index():
+    return render_template('index.html')
+
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
@@ -57,7 +61,7 @@ def predict():
     # Log the prediction to Evidently
     evidently_dashboard = Dashboard(tabs=[DataDriftTab(), NumericStabilityTab(), CatTargetDriftTab()])
     evidently_dashboard.calculate(df, X_preprocessed, prediction)
-    evidently_dashboard.save_html(os.path.join('static', 'evidently_report.html'))
+    evidently_dashboard.save_html(os.path.join('/app/static', 'evidently_report.html'))
 
     return jsonify({'prediction': int(prediction[0])})
 

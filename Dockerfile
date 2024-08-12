@@ -8,6 +8,9 @@ WORKDIR /app
 COPY src/app/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Install Gunicorn
+RUN pip install gunicorn
+
 # Copy the Flask app code
 COPY src/app/ /app/
 

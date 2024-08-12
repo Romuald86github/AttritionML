@@ -2,9 +2,7 @@ import os
 import pickle
 import pandas as pd
 import boto3
-from flask import Flask, request, jsonify, render_template, send_from_directory
-from evidently.dashboard import Dashboard
-from evidently.tabs import DataDriftTab, NumericStabilityTab, CatTargetDriftTab
+from flask import Flask, request, jsonify, render_template
 
 # Flask app initialization
 app = Flask(__name__, static_folder='/app/static', template_folder='/app/templates')
@@ -12,7 +10,7 @@ app = Flask(__name__, static_folder='/app/static', template_folder='/app/templat
 # Set up AWS credentials
 aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID')
 aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')
-aws_region = os.getenv('AWS_DEFAULT_REGION')
+aws_region = 'eu-north-1'
 
 # Set the S3 bucket and path
 bucket_name = "attritionproject"
@@ -52,18 +50,7 @@ def predict():
     df = pd.DataFrame([data])
     X_preprocessed = preprocessing_pipeline.transform(df)
     prediction = model.predict(X_preprocessed)
-
-    # Log the prediction to Evidently
-    evidently_dashboard = Dashboard(tabs=[DataDriftTab(), NumericStabilityTab(), CatTargetDriftTab()])
-    evidently_dashboard.calculate(df, X_preprocessed, prediction)
-    report_path = os.path.join(app.static_folder, 'evidently_report.html')
-    evidently_dashboard.save_html(report_path)
-
     return jsonify({'prediction': int(prediction[0])})
-
-@app.route('/evidently_report')
-def serve_evidently_report():
-    return send_from_directory(app.static_folder, 'evidently_report.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5010)

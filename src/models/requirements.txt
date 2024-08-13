@@ -1,6 +1,6 @@
 pandas
 scipy
-numpy
+numpy-2.0.1
 scikit-learn
 mlflow
 boto3

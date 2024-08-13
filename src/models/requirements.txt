@@ -1,3 +1,5 @@
-mlflow
+numpy
+pandas
 scikit-learn
+mlflow
 boto3

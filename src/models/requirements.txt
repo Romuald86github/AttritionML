@@ -1,4 +1,6 @@
 pandas
 scikit-learn
-mlflow
+imbalanced-learn
+scipy
 boto3
+mlflow

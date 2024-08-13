@@ -8,7 +8,6 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
 import boto3
 
-
 def load_data():
     with open('data/processed/preprocessed_data.pkl', 'rb') as f:
         X_train, X_val, X_test, y_train, y_val, y_test = pickle.load(f)
@@ -16,7 +15,7 @@ def load_data():
 
 def train_and_evaluate_models(X_train, y_train, X_val, y_val, X_test, y_test):
     # Set MLflow server and tracking URI
-    mlflow.set_tracking_uri("http://localhost:5001")
+    mlflow.set_tracking_uri("http://localhost:5006")
 
     # Set the experiment name
     mlflow.set_experiment("predict-attrition")

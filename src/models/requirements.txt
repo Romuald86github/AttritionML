@@ -1,7 +1,4 @@
 pandas
-scipy
-numpy
 scikit-learn
 mlflow
 boto3
-requests

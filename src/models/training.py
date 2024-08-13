@@ -21,6 +21,8 @@ def train_and_evaluate_models(X_train, y_train, X_val, y_val, X_test, y_test):
     # Set the experiment name
     mlflow.set_experiment("predict-attrition")
 
+    mlflow.set_artifact_uri("s3://attritionproject/attrition/artifacts")
+
     # Set S3 bucket and path for artifact storage
     aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID')
     aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')

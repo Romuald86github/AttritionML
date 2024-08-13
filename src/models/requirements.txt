@@ -3,4 +3,4 @@ scikit-learn
 imbalanced-learn
 scipy
 boto3
-# mlflow
+mlflow==1.26.1

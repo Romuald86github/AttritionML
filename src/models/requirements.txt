@@ -1,5 +1,5 @@
 pandas==1.5.3
-numpy==1.23.5
+numpy==1.24.3
 scikit-learn
-mlflow==2.1.1
+mlflow
 boto3

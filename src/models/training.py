@@ -15,7 +15,7 @@ def load_data():
 
 def train_and_evaluate_models(X_train, y_train, X_val, y_val, X_test, y_test):
     # Set MLflow server and tracking URI
-    mlflow.set_tracking_uri("http://localhost:5006")
+    mlflow.set_tracking_uri("http://localhost:5002")
 
     # Set the experiment name
     mlflow.set_experiment("predict-attrition")

@@ -7,7 +7,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
 import boto3
-import numpy as np
+
 
 def load_data():
     with open('data/processed/preprocessed_data.pkl', 'rb') as f:

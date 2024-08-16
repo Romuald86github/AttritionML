@@ -29,7 +29,7 @@ jobs:
       - name: Initialize EB environment (if not already created)
         run: |
           eb init -p docker my-flask-app --region eu-north-1
-          eb create my-env --single
+          eb create my-flask-app-env --single
 
       - name: Deploy to Elastic Beanstalk
         run: |

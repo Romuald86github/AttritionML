@@ -13,15 +13,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Elastic Beanstalk CLI
+      - name: Install AWS CLI
         run: |
-          sudo apt-get update && sudo apt-get install -y unzip
-          curl -O https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
-          unzip awscli-exe-linux-x86_64.zip
           sudo ./aws/install --update
-          curl -O https://s3.amazonaws.com/elasticbeanstalk-cli-resources/releases/EBCLI-3.19.4/ebcli-3.19.4.zip
-          unzip ebcli-3.19.4.zip -d ebcli
-          sudo ./ebcli/eb init --region eu-north-1 --platform docker
+
+      - name: Install AWS Elastic Beanstalk CLI
+        run: |
+          sudo apt-get update && sudo apt-get install -y python3-pip
+          pip3 install --upgrade awsebcli
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
@@ -38,7 +37,3 @@ jobs:
       - name: Deploy to Elastic Beanstalk
         run: |
           eb deploy
-
-      - name: Post-deployment cleanup
-        run: |
-          rm -rf ./awscli ./ebcli

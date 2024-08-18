@@ -4,8 +4,8 @@ import pandas as pd
 import boto3
 from flask import Flask, request, jsonify, render_template
 
-# Flask app initialization
-app = Flask(__name__, static_folder='/app/static', template_folder='/app/templates')
+# Flask application initialization
+application = Flask(__name__, static_folder='/application/static', template_folder='/application/templates')
 
 # Set up AWS credentials
 aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID')
@@ -40,11 +40,11 @@ s3_client.download_file(bucket_name, pipeline_path, local_pipeline_path)
 with open(local_pipeline_path, 'rb') as f:
     preprocessing_pipeline = pickle.load(f)
 
-@app.route('/')
+@application.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/predict', methods=['POST'])
+@application.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
     df = pd.DataFrame([data])
@@ -53,4 +53,4 @@ def predict():
     return jsonify({'prediction': int(prediction[0])})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5010)
+    application.run(host='0.0.0.0', port=5010)

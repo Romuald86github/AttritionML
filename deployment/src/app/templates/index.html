@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attrition Prediction App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Attrition Prediction App</h1>
+        <form id="prediction-form">
+            <div class="form-group">
+                <label for="daily-rate">Daily Rate:</label>
+                <input type="number" id="daily-rate" name="DailyRate" required>
+            </div>
+            <div class="form-group">
+                <label for="distance-from-home">Distance from Home:</label>
+                <input type="number" id="distance-from-home" name="DistanceFromHome" required>
+            </div>
+            <div class="form-group">
+                <label for="environment-satisfaction">Environment Satisfaction:</label>
+                <select id="environment-satisfaction" name="EnvironmentSatisfaction" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="job-involvement">Job Involvement:</label>
+                <select id="job-involvement" name="JobInvolvement" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="job-satisfaction">Job Satisfaction:</label>
+                <select id="job-satisfaction" name="JobSatisfaction" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="marital-status">Marital Status:</label>
+                <select id="marital-status" name="MaritalStatus" required>
+                    <option value="Single">Single</option>
+                    <option value="Married">Married</option>
+                    <option value="Divorced">Divorced</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="num-companies-worked">Number of Companies Worked:</label>
+                <input type="number" id="num-companies-worked" name="NumCompaniesWorked" required>
+            </div>
+            <div class="form-group">
+                <label for="overtime">Overtime:</label>
+                <select id="overtime" name="OverTime" required>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="stock-option-level">Stock Option Level:</label>
+                <input type="number" id="stock-option-level" name="StockOptionLevel" required>
+            </div>
+            <div class="form-group">
+                <label for="total-working-years">Total Working Years:</label>
+                <input type="number" id="total-working-years" name="TotalWorkingYears" required>
+            </div>
+            <div class="form-group">
+                <label for="training-times-last-year">Training Times Last Year:</label>
+                <input type="number" id="training-times-last-year" name="TrainingTimesLastYear" required>
+            </div>
+            <div class="form-group">
+                <label for="work-life-balance">Work-Life Balance:</label>
+                <select id="work-life-balance" name="WorkLifeBalance" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="years-at-company">Years at Company:</label>
+                <input type="number" id="years-at-company" name="YearsAtCompany" required>
+            </div>
+            <button type="submit" class="btn">Predict</button>
+        </form>
+        <div id="prediction-result"></div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

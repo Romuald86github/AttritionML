@@ -18,8 +18,8 @@ COPY src/app/application.py /app/
 COPY src/app/static /app/static
 COPY src/app/templates /app/templates
 
-# Expose the port for Gunicorn
-EXPOSE 5010
+# Expose port 80 for EB (externally accessible)
+EXPOSE 80
 
-# Start Gunicorn with specified number of workers and port
-CMD ["gunicorn", "application:app", "-b", "0.0.0.0:5010", "-w", "4"]
+# Start Gunicorn on port 80 with 4 workers
+CMD ["gunicorn", "application:app", "-b", "0.0.0.0:80", "-w", "4"]
